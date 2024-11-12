@@ -34,15 +34,15 @@ int evaluate(int n,char exp[]){
 }
 void calculate(float a,float b,char c){
     switch(c){
-        case '+': push(a+b);
+        case '+': push(b+a);
                   break;
-        case '-': push(a-b);
+        case '-': push(b-a);
                   break;
-        case '*': push(a*b);
+        case '*': push(b*a);
                   break;
-        case '/': push(a/b);
+        case '/': push(b/a);
                   break;
-        case '^': push(pow(a,b));
+        case '^': push(pow(b,a));
                   break;
     }
 }
