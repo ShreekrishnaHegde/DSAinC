@@ -8,18 +8,29 @@ Evaluation of Suffix expression with single digit operands and operators: +, -, 
 #include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
-int stack[10];
+float stack[10];
 int top=-1;
 
 bool isOperator(char c);
-int pop();
-void push(int n);
+float pop();
+void push(float n);
 void calculate(float a,float b,char c);
 bool isOperator(char c);
-int evaluate(int n,char exp[]);
+float evaluate(int n,char exp[]);
 
-int evaluate(int n,char exp[]){
-    int x,y;
+void main(){
+
+    char exp[20];
+    int size;
+    printf("\nEnter the suffix expression: ");
+    scanf("%s",exp);
+    size=strlen(exp);
+    printf("%f",evaluate(size,exp));
+}
+
+//This function evaluates the given expression
+float evaluate(int n,char exp[]){
+    float x,y;
     for(int i=0;i<n;i++){
         char c=exp[i];
         if(isdigit(c))
@@ -32,6 +43,7 @@ int evaluate(int n,char exp[]){
     }
     return pop();
 }
+//This function does the arthmatic operations 
 void calculate(float a,float b,char c){
     switch(c){
         case '+': push(b+a);
@@ -46,29 +58,21 @@ void calculate(float a,float b,char c){
                   break;
     }
 }
-void push(int n){
+//To add the element into the stack
+void push(float n){
     top++;
     stack[top]=n;
 }
-int pop(){
-    int temp=stack[top];
+//To remove the element from the stack
+float pop(){
+    float temp=stack[top];
     top--;
     return temp;
 }
+//Below function returns whether the argument is an operator or not.
 bool isOperator(char c){
     if(c=='+' || c=='-' ||c=='*' || c=='/' || c=='^')
         return true;
     return false;
-}
-
-
-void main(){
-
-    char exp[20];
-    int size;
-    printf("\nEnter the suffix expression: ");
-    scanf("%s",exp);
-    size=strlen(exp);
-    printf("%d",evaluate(size,exp));
 }
 
