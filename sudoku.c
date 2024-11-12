@@ -43,6 +43,16 @@ bool solve(){
     //Sudoku is solved
     if(flag==true)
         return true;
+    for(int number=1;number<=9;number++){
+        if(isValid(row,col,number)){
+            board[row][col]=number;
+            if(solve())
+                return true;
+            else
+                board[row][col]=0;
+        }
+    }
+    return false;
 }
 void display(){
     for(int i=0;i<n;i++){
