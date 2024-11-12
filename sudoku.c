@@ -19,7 +19,7 @@ bool solve();
 bool isValid(int row,int col,int number);
 void main(){
     
-    if(solve(board))
+    if(solve())
         display(board);
     else
         printf("\nCannot Solve sudoku");
@@ -38,8 +38,8 @@ bool isValid(int row,int col,int number){
     //to find whether number is present in the same block or not
     int rowStart=row-row%3;
     int colStart=col-col%3;
-    for(int i=rowStart;i<=rowStart+3;i++){
-        for(int j=colStart;j<=colStart+3;j++){
+    for(int i=rowStart;i<rowStart+3;i++){
+        for(int j=colStart;j<colStart+3;j++){
             if(board[i][j]==number)
                 return false;
         }
@@ -66,7 +66,7 @@ bool solve(){
             break;
     }
     //Sudoku is solved
-    if(flag==true)
+    if(flag)
         return true;
     for(int number=1;number<=9;number++){
         if(isValid(row,col,number)){
@@ -83,6 +83,6 @@ void display(){
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++)
             printf("%d ",board[i][j]);
-        printf("");
+        printf("\n");
     }
 }
