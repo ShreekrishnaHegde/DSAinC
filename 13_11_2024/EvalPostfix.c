@@ -10,7 +10,7 @@ Evaluation of Suffix expression with single digit operands and operators: +, -, 
 float stack[10];
 int top=-1;
 
-bool isOperator(char c);
+
 float pop();
 void push(float n);
 void calculate(float a,float b,char c);
@@ -59,13 +59,11 @@ void calculate(float a,float b,char c){
 }
 //To add the element into the stack
 void push(float n){
-    top++;
-    stack[top]=n;
+    stack[++top]=n;
 }
 //To remove the element from the stack
 float pop(){
-    float temp=stack[top];
-    top--;
+    float temp=stack[top--];
     return temp;
 }
 //Below function returns whether the argument is an operator or not.
