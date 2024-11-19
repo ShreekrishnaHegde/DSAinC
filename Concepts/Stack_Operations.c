@@ -27,8 +27,9 @@ void pop()
     if(isEmpty())
         printf("\n Stack is Empty");
     else{
-        printf("\nThe popped element is %d",stack[top]);
+        int temp=stack[top];
         top--;
+        printf("\nThe popped element is %d",temp);
     }
 }
 //To diplay the top element of the stack
