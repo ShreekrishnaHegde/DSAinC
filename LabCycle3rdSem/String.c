@@ -5,8 +5,7 @@ void main(){
     char str1[20]="Information";
     char str2[20]="Science";
     char str3[20];
-    printf("String 1 is: ");
-    puts(str1);
+
     printf("String 2 is: ");
     puts(str2);
     //String length
