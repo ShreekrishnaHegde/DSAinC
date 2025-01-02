@@ -18,6 +18,7 @@ void insertAtPos(Node **head);
 void deleteAtPos(Node** head);
 void print(Node* head);
 void size(Node* head);
+void search(Node* head);
 // Driver Code
 int main() {
     struct Node* head = NULL;
@@ -26,6 +27,10 @@ int main() {
     print(head);
     insertAtPos(&head);
     print(head);
+    insertAtFirst(&head);
+    insertAtLast(&head);
+    print(head);
+    search(head);
     return 0;
 }
 
@@ -200,7 +205,7 @@ void print(Node* head) {
     printf("NULL\n");
     size(head);
 }
-
+//Function to find the size of the list
 void size(Node* head){
     Node* temp=head;
     int count=0;
@@ -210,4 +215,26 @@ void size(Node* head){
     }
     printf("\nSize of the list is: %d\n",count);
     
+}
+//Function to search an element in the list
+void search(Node* head){
+    int ele;
+    if(head==NULL){
+        printf("\nList is empty");
+        return;
+    }
+    Node* temp=head;
+    printf("\nEnter the element to be searched: ");
+    scanf("%d",&ele);
+    int i=0,flag=0;
+    while(temp!=NULL){
+        if(temp->data==ele){
+            printf("\nElement is found at location %d",i);
+            flag=1;
+        }
+        temp=temp->next;
+        i++;
+    }
+    if(flag==0)
+        printf("\nElement not found");
 }
