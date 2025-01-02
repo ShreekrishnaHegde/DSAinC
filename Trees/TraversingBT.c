@@ -7,13 +7,7 @@ typedef struct Node{
     struct Node *left,*right;
 }Node;
 
-Node* create(int data){
-    Node* newNode=(Node*)malloc(sizeof(Node));
-    newNode->data=data;
-    newNode->left=NULL;
-    newNode->right=NULL;
-    return newNode;
-}
+Node* create(int data);
 void printInOrder(Node* node);
 void printPreOrder(Node* node);
 void printPostOrder(Node* node);
@@ -33,6 +27,13 @@ void main(){
     printPreOrder(root);
 }
 
+Node* create(int data){
+    Node* newNode=(Node*)malloc(sizeof(Node));
+    newNode->data=data;
+    newNode->left=NULL;
+    newNode->right=NULL;
+    return newNode;
+}
 /*
 -------------------------Algorithm for inorder Traversal--------------------
 Inorder(root):
