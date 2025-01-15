@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #define MAX 100
 
 // Function to check reflexivity
-bool isReflexive(int relation[][2], int n, int elements[], int elem_count) {
+bool isReflexive(int relation[][2], int n, int* elements, int elem_count) {
     for (int i = 0; i < elem_count; i++) {
         int found = 0;
         for (int j = 0; j < n; j++) {
-            if (elements[i] == relation[j][0] && elements[i] == relation[j][1]) {
+            if (*(elements+i) == relation[j][0] && *(elements+i) == relation[j][1]) {
                 found = 1;
                 break;
             }
@@ -19,12 +20,12 @@ bool isReflexive(int relation[][2], int n, int elements[], int elem_count) {
 }
 
 //Function to check irreflexive
-bool isIrreflexive(int relation[][2],int n,int elements[],int elem_count){
+bool isIrreflexive(int relation[][2],int n,int* elements,int elem_count){
     for(int i=0;i<elem_count;i++)
     {
         for(int j=0;j<n;j++)
         {
-            if(elements[i] == relation[j][0] && elements[i] == relation[j][1])
+            if(*(elements+i) == relation[j][0] && *(elements+i) == relation[j][1])
             {
                 return false;
             }
@@ -109,14 +110,14 @@ bool isAsymmetric(int relation[][2], int n) {
 }
 
 int main() {
-    int n, elem_count, elements[MAX], relation[MAX][2];
-
+    int n, elem_count, relation[MAX][2];
+    int *elements=NULL,*relation;
     printf("Enter the number of elements in the set: ");
     scanf("%d", &elem_count);
-
+    elements=(int*)malloc(elem_count*sizeof(int));
     printf("Enter the elements of the set: ");
     for (int i = 0; i < elem_count; i++) {
-        scanf("%d", &elements[i]);
+        scanf("%d", elements+i);
     }
 
     printf("Enter the number of pairs in the relation: ");
