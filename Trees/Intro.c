@@ -47,5 +47,7 @@ Depth of the Tree: The depth of a tree is the length of the longest path from a 
 
 ----------------------------------Binary Tree--------------------------------
 Strictly binary tree: A binary tree is called strictly binary if all its nodes barring the leaf nodes contain two child nodes. 
-Perfect binary tree: A binary tree is called perfect binary tree if all its leaf nodes are at the lowest level and all the non-leaf nodes contain two child nodes. 
+Perfect binary tree: A binary tree is called perfect binary tree if all its leaf nodes are at the lowest level and all the non-leaf nodes contain two child nodes.
+Balanced binary tree A binary tree is called balanced binary tree if the depths of the subtrees of all its nodes do not differ by more than 1. 
+Complete binary tree A binary tree of depth d is called complete binary tree if all its levels from 0 to d–1 contain maximum possible number of nodes and all the leaf nodes present at level d are placed towards the left side. 
 */
