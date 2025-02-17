@@ -17,7 +17,8 @@ void printPreOrder(Node* node);
 void printPostOrder(Node* node);
 Node* search(Node* node,int key);
 Node* insert(Node* node,int data);
-Node* delete(Node* node,int data);
+Node* delete(Node* node,int item);
+Node* getSuccessor(Node* curr);
 
 void main(){
     int data,item,ch,key;
@@ -42,12 +43,16 @@ void main(){
                     scanf("%d",&key);
                     search(root,key)==NULL ? printf("\nElement Found"): printf("\nElement not found");
                     break;
-            case 4: printf("\nThank you!");
+            case 4: printf("\nEnter the element to be deleted: ");
+                    scanf("%d",&item);
+                    root=delete(root,item);
+                    break;
+            case 5: printf("\nThank you!");
                     exit(0);
             default: exit(0);                    
         }
     }
-    while(ch!=4);
+    while(ch!=5);
 }
 
 //to create and initialize the node
@@ -144,4 +149,33 @@ Node*  insert(Node* node,int data){
     return node;  
 }
 
+Node* delete(Node* root,int key){
+    if(root==NULL)
+        return root;
+    if(key<root->data)
+        root->left=delete(root->left,key);
+    else if(key>root->data)
+        root->right=delete(root->right,key);
+    else{
+        if(root->left==NULL){
+            Node* temp=root->right;
+            free(root);
+            return temp;
+        }
+        if(root->right==NULL){
+            Node* temp=root->left;
+            free(root);
+            return temp;
+        }
+        Node* succ=getSuccessor(root);
+        root->data=succ->data;
+        root->right=delete(root->right,succ->data);
+    }
+}
 
+Node* getSuccessor(Node* curr){
+    curr = curr->right;
+    while (curr != NULL && curr->left != NULL)
+        curr = curr->left;
+    return curr;
+}
