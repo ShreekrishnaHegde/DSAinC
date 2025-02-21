@@ -109,7 +109,7 @@ If true,
     return false
 */
 bool isFull(){
-    return top>=stack+n;
+    return top==(stack+n-1);
 }
 /*
 -----------------------------Algorithm for isEmpty()--------------------------------
@@ -120,7 +120,7 @@ If true,
     return false
 */
 bool isEmpty(){
-    return top==stack-1;
+    return top>=stack-1;
 }
 
 
