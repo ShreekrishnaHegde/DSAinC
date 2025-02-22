@@ -1,10 +1,32 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 typedef struct Node{
     int data,height;
     struct Node *left,*right;
 }Node;
+Node* create(int data);
+int height(Node* node);
+int max(int a,int b);
 
+int getBalance(Node* node);
+Node* rightRotate(Node* y);
+Node* leftRotate(Node* x);
+Node* insert(Node* node,int data);
+void printInorder(Node* root);
+
+
+
+void main(){
+
+    Node* root=NULL;
+    int ch,data;
+    int arr[]={10,20,30,40,50,25};
+    for(int i=0;i<3;i++)
+        root=insert(root,arr[i]);
+    printInorder(root);
+    
+    
+}
 int height(Node* node){
     if(node==NULL)
         return 0;
@@ -60,7 +82,7 @@ Node* insert(Node* node,int data){
         return create(data);
     if(data<node->data)
         node->left=insert(node->left,data);
-    else if(data>node->right)
+    else if(data>node->data)
         node->right=insert(node->right,data);
     else    
         return node;
@@ -86,4 +108,12 @@ Node* insert(Node* node,int data){
     }
     return node;
     
+}
+
+void printInorder(Node* root){
+    if(root==NULL)
+        return;
+    printInorder(root->left);
+    printf("%d ",root->data);
+    printInorder(root->right);
 }
