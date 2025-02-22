@@ -19,15 +19,27 @@ void printInorder(Node* root);
 void main(){
 
     Node* root=NULL;
-    int ch,data;
-    int arr[]={10,20,30,40,50,25};
-    for(int i=0;i<3;i++)
-        root=insert(root,arr[i]);
-    printInorder(root);
-    
-    
+    int data,ch;
+    printf("\n1.Insertion\n2.Deletion");
+    do{
+        printf("\nEnter your choice: ");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:
+                printf("\nEnter the data: ");
+                scanf("%d",&data);
+                root=insert(root,data);
+                printf("Height Data");
+                printInorder(root);
+            case 2:
+                
+                break;
+            default: break;
+        }
+    }
+    while(ch!=3);
 }
-int height(Node* node){
+int height(Node* node){ 
     if(node==NULL)
         return 0;
     return node->height;
@@ -60,7 +72,8 @@ Node* rightRotate(Node* y){
     y->left=T2;
 
     y->height=1+max(height(y->left),height(y->right));
-
+    x->height=1+max(height(x->left),height(x->right));
+    free(T2);
     return x;
 }
 
@@ -71,8 +84,9 @@ Node* leftRotate(Node* x){
     y->left=x;
     x->right=T2;
 
-    x->height=1+max(height(y->left),height(y->right));
-
+    x->height=1+max(height(x->left),height(x->right));
+    y->height=1+max(height(y->left),height(y->right));
+    free(T2);
     return y;
 
 }
@@ -90,22 +104,19 @@ Node* insert(Node* node,int data){
 
     int balance=getBalance(node);
 
-    if(balance>1){
-        if(data<node->left->data)
-            return rightRotate(node);
-        if(data>node->left->data){
-            node->left=leftRotate(node->left);
-            return rightRotate(node);
-        }
+    if(balance>1 && data<node->left->data)
+        return rightRotate(node);
+    if(balance>1 && data>node->left->data){
+        node->left=leftRotate(node->left);
+        return rightRotate(node);
     }
-    if(balance<-1){
-        if(data>node->right->data)
-            return leftRotate(node);
-        if(data<node->right->data){
-            node->right=rightRotate(node);
-            return leftRotate(node);
-        }
+    if(balance<-1 && data>node->right->data)
+        return leftRotate(node);
+    if(balance<-1 && data<node->right->data){
+        node->right=rightRotate(node);
+        return leftRotate(node);
     }
+    
     return node;
     
 }
@@ -113,7 +124,8 @@ Node* insert(Node* node,int data){
 void printInorder(Node* root){
     if(root==NULL)
         return;
+        
     printInorder(root->left);
-    printf("%d ",root->data);
+    printf("\n%d\t%d",root->height,root->data);
     printInorder(root->right);
 }
