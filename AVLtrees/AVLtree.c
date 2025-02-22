@@ -30,6 +30,31 @@ int getBalance(Node* node){
     return height(node->left)-height(node->right);
 }
 
+Node* rightRotate(Node* y){
+    Node* x=y->left;
+    Node* T2=x->right;
+
+    x->right=y;
+    y->left=T2;
+
+    y->height=1+max(height(y->left),height(y->right));
+
+    return x;
+}
+
+Node* leftRotate(Node* x){
+    Node* y=x->right;
+    Node* T2=y->left;
+
+    y->left=x;
+    x->right=T2;
+
+    x->height=1+max(height(y->left),height(y->right));
+
+    return y;
+
+}
+
 Node* insert(Node* node,int data){
     if(node==NULL)
         return create(data);
@@ -43,5 +68,22 @@ Node* insert(Node* node,int data){
 
     int balance=getBalance(node);
 
+    if(balance>1){
+        if(data<node->left->data)
+            return rightRotate(node);
+        if(data>node->left->data){
+            node->left=leftRotate(node->left);
+            return rightRotate(node);
+        }
+    }
+    if(balance<-1){
+        if(data>node->right->data)
+            return leftRotate(node);
+        if(data<node->right->data){
+            node->right=rightRotate(node);
+            return leftRotate(node);
+        }
+    }
+    return node;
     
 }
