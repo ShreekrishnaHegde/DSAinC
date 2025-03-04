@@ -3,11 +3,18 @@ Program to create an expression tree from a postfix expression and evaluate the 
 */
 
 #include <stdio.h>
-
+#include <stdlib.h>
 typedef struct Node{
     char data;
     struct Node *left, *right;
-} Node;
+}Node;
+
+Node* createNode(char data){
+    Node* newNode=(Node*)malloc(sizeof(Node));
+    newNode->data=data;
+    newNode->left=newNode->right=NULL;
+    return newNode;
+}
 
 int evalutate(Node* root){
     if(!root)
@@ -30,3 +37,15 @@ int evalutate(Node* root){
     return -1;
 }
 
+int main(){
+
+    Node* root=createNode('/');
+    root->left=createNode('+');
+    root->right=createNode('*');
+    root->left->left=createNode('9');
+    root->left->right=createNode('5');
+    root->right->left=createNode('2');
+    root->right->right=createNode('7');
+    printf("Result: %d\n",evalutate(root));
+    return 0;
+}
