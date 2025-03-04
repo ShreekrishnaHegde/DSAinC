@@ -129,3 +129,4 @@ void printInorder(Node* root){
     printf("\n%d\t%d",root->height,root->data);
     printInorder(root->right);
 }
+  
